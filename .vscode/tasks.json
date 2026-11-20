@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "C: build current file",
+      "type": "process",
+      "command": "C:/msys64/ucrt64/bin/gcc.exe",
+      "args": [
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.exe"
+      ],
+      "options": {
+        "cwd": "${fileDirname}",
+        "env": {
+          "PATH": "C:/msys64/ucrt64/bin;${env:PATH}"
+        }
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "C: run current file",
+      "type": "process",
+      "command": "${fileDirname}/${fileBasenameNoExtension}.exe",
+      "dependsOn": "C: build current file",
+      "dependsOrder": "sequence",
+      "options": {
+        "cwd": "${fileDirname}",
+        "env": {
+          "PATH": "C:/msys64/ucrt64/bin;${env:PATH}"
+        }
+      },
+      "problemMatcher": []
+    }
+  ]
+}
